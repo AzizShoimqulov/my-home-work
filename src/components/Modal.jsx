@@ -63,13 +63,13 @@ export default function Modal({ onClose, onSubmit, initialData }) {
             <button
               type="button"
               onClick={onClose}
-              className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              className="bg-gray-300 px-4 py-2 rounded cursor-pointer hover:bg-gray-400"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700"
             >
               Save
             </button>

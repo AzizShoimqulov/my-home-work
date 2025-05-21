@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import Sidebar from './components/Sidebar'
 import Modal from './components/Modal'
 import TaskTable from './components/TaskTable'
 
 export default function App() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem('tasks')
+    return saved ? JSON.parse(saved) : []
+  })
+
   const [isOpen, setIsOpen] = useState(false)
   const [editTask, setEditTask] = useState(null)
   const [search, setSearch] = useState('')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   const filteredTasks = tasks.filter(task =>
     task.title.toLowerCase().includes(search.toLowerCase())
@@ -30,24 +39,27 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      {/* Sidebar */}
+    <div
+      className="min-h-screen p-6 bg-cover bg-center"
+      style={{
+        backgroundImage:
+          'url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/...")'
+      }}
+    >
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       <div className="max-w-3xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          {/* Menu Button with Icon and Text */}
           <button
-            className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+            className="flex items-center cursor-pointer gap-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
             onClick={() => setIsSidebarOpen(true)}
           >
             <FiMenu size={20} />
             <span>Menu</span>
           </button>
 
-          {/* Add Task Button */}
           <button
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-700"
             onClick={() => {
               setEditTask(null)
               setIsOpen(true)
@@ -56,7 +68,6 @@ export default function App() {
             Add Task
           </button>
 
-          {/* Search Input */}
           <input
             type="text"
             placeholder="Search..."
@@ -66,7 +77,6 @@ export default function App() {
           />
         </div>
 
-        {/* Task Table */}
         <TaskTable
           tasks={filteredTasks}
           onEdit={task => {
@@ -77,7 +87,6 @@ export default function App() {
         />
       </div>
 
-      {/* Modal */}
       {isOpen && (
         <Modal
           onClose={() => {

@@ -24,13 +24,13 @@ export default function TaskTable({ tasks, onEdit, onDelete }) {
                 <td className="p-2">
                   <button
                     onClick={() => onEdit(task)}
-                    className="text-blue-500 hover:underline mr-4"
+                    className="text-blue-500 cursor-pointer hover:underline mr-4"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => onDelete(task.id)}
-                    className="text-red-500 hover:underline"
+                    className="text-red-500 cursor-pointer hover:underline"
                   >
                     Delete
                   </button>
