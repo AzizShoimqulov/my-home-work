@@ -4,6 +4,7 @@ export default function Modal({ onClose, onSubmit, initialData }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [error, setError] = useState({})
+  
 
   useEffect(() => {
     if (initialData) {
