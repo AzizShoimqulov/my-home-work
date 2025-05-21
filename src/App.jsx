@@ -36,12 +36,13 @@ export default function App() {
 
       <div className="max-w-3xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          {/* Menu Icon with react-icons */}
+          {/* Menu Button with Icon and Text */}
           <button
-            className="bg-gray-800 text-white p-2 rounded hover:bg-gray-700"
+            className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
             onClick={() => setIsSidebarOpen(true)}
           >
-            <FiMenu size={24} />
+            <FiMenu size={20} />
+            <span>Menu</span>
           </button>
 
           {/* Add Task Button */}
